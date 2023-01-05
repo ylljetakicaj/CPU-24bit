@@ -82,7 +82,7 @@ assign mux_ALU = (ALUSrc == 1'b1) ? Zgjerimi : readData2;
 ALUControl AC(ALUOp, instruction[3:0], instruction[23:20], ALUCtrl);
 
 //inicializimi i ALU(T7, T10, T19[3], T19[2], T19[1:0], T20, T11, T21, T22)
-ALU24 ALU(readData1, mux_ALU, ALUCtrl[3], ALUCtrl[2:0], zerof, ALU_Out, overflow, carrout);
+ALU24b ALU(readData1, mux_ALU, ALUCtrl[3], ALUCtrl[2:0], zerof, ALU_Out, overflow, carrout);
 
 //inicializimi i Data Memory (T11, T8, CU_OUT_X, CU_OUT_X, CPU_IN_1, T13)
 DataMemory DM(ALU_Out, readData2, MemWrite, MemRead, Clock, memToMux);
