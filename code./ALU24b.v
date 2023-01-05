@@ -32,7 +32,7 @@ module ALU24b(
     );
     
     wire [22:0] COUT;
-    //LIDH 16 ALU 1-biteshe
+    //LIDH 24 ALU 1-biteshe
     ALU1b ALU0(A[0], B[0], BNegate, BNegate, Result[15], Op, Result[0], COUT[0]);
     ALU1b ALU1(A[1], B[1], COUT[0], BNegate, 0, Op, Result[1], COUT[1]);
     ALU1b ALU2(A[2], B[2], COUT[1], BNegate, 0, Op, Result[2], COUT[2]);
