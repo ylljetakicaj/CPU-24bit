@@ -1,6 +1,6 @@
 ## CPU-24bit
 
-This project models a 16 bit single-cycle CPU using Verilog.
+This project models a 24 bit single-cycle CPU using Verilog.
 
 ##  Authors
 
