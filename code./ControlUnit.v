@@ -23,7 +23,6 @@
 module ControlUnit(
     input [3:0] OPCODE, //HYRJA NGA D_OUT_1
     output reg RegDst, //DALJET E CU, CU_OUT_x
-    output reg Jump,
     output reg Branch,
     output reg MemRead,
     output reg MemToReg,
