@@ -99,6 +99,7 @@ end
     AluOp[1] = 0;
     AluOp[0] = 1;
     end 
+    
 4'b0001: //PER ADDI
     begin
     RegDst = 0;
