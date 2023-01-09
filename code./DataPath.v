@@ -22,26 +22,20 @@
 
 module DataPath(
 input Clock, //Hyrje nga CPU - Teli CPU_IN_1
-input RegDst, //Hyrjet nga CU - Telat CU_OUT_X
-input Jump, 
-input Branch, 
-input MemRead,
-input MemToReg, 
-input MemWrite,
-input ALUSrc, 
-input RegWrite,
-input[1:0] ALUOp, //Hyrjet nga CU - Telat CU_OUT_X
-output[3:0] opcode //Dalje per ne CU - Teli D_OUT_1
+input RegDst, Branch, MemRead,
+MemWrite, RegWrite, MemToReg, ALUSrc, //Hyrjet nga CU - Telat CU_OUT_X
+input[1:0] ALUOp, //Hyrjet nga CU - Telat CU_OUT_X 
+output [3:0] opcode,
+output Dalja
 );
-//PC dhe InstuctionMemory nuk i perfshijme ne DataPath 
-//ato marrin pjese kur e bejme lidhjen CPU
+
 reg[23:0] pc_initial; // Regjistri PC
-wire[23:0] pc_next, pc4, pcbeq, pcjump; //Telat: T1, T2, T3, T4
+wire[23:0] pc_next, pc4, pcbeq; //Telat: T1, T2, T3
 wire[23:0] instruction; //Teli T5
-wire[3:0] mux_regfile; //Teli T6????
+wire[3:0] mux_regfile; //Teli T6
 wire[23:0] readData1, readData2, writeData, //Telat T7-T9
 mux_ALU, ALU_Out, Zgjerimi, memToMux, //Telat T10-T13
-shifter2beq, shifter2jump, branchAdderToMux, beqAddress, jumpAddress; //Telat T14-T18
+shifter2beq, branchAdderToMux, beqAddress; //Telat T14-T18
 wire[3:0] ALUCtrl; //Teli T19
 wire zerof, overflow, carryout; //Telat T20-T22
 wire andMuxBranch; //Teli T23
@@ -59,8 +53,10 @@ end
 //T2 - PC rritet per 3 (ne sistemet 24 biteshe) per te gjitha instruksionet pervec BEQ
 assign pc4 = pc_initial + 3;
 
-//T14 - pergatitja e adreses per kercim ne BEQ (164 bit si MSB, 16 bit nga pjesa imediate, 2 bit shtyrje majtas (x4)
-assign shifter2beq = {{12{instruction[11]}}, instruction[11:0]};
+//T14 - pergatitja e adreses per kercim ne BEQ (164 bit si MSB, 12 bit nga pjesa imediate, 1 bit shtyrje majtas (x2)
+wire[23:0] shifter2beq1;
+assign shifter2beq1 = {{11{instruction[11]}}, instruction[11:0], 1'b0};
+assign shifter2beq = shifter2beq1 + shifter2beq1;
 
 // Instr mem // inicializimi i IM (PC adresa hyrje, teli instruction dalje)
 InstructionMemory IM(pc_initial, instruction);
@@ -82,7 +78,7 @@ assign mux_ALU = (ALUSrc == 1'b1) ? Zgjerimi : readData2;
 ALUControl AC(ALUOp, instruction[3:0], instruction[23:20], ALUCtrl);
 
 //inicializimi i ALU(T7, T10, T19[3], T19[2], T19[1:0], T20, T11, T21, T22)
-ALU24b ALU(readData1, mux_ALU, ALUCtrl[3], ALUCtrl[2:0], zerof, ALU_Out, overflow, carrout);
+ALU24b ALU(readData1, mux_ALU, ALUCtrl[3], ALUCtrl[2:0], zerof, ALU_Out, overflow, carryout);
 
 //inicializimi i Data Memory (T11, T8, CU_OUT_X, CU_OUT_X, CPU_IN_1, T13)
 DataMemory DM(ALU_Out, readData2, MemWrite, MemRead, Clock, memToMux);
@@ -101,5 +97,7 @@ assign pcbeq = (andMuxBranch == 1'b1) ? beqAddress : pc4;
 
 //Teli D_OUT_1 qe i dergohet CU
 assign opcode = instruction[23:20];
+
+assign Dalja=ALU_Out;
 
 endmodule
