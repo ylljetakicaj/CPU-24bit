@@ -20,34 +20,33 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 //Hyrje ne CPU - Clock CPU_IN_1
-module CPU(input Clock);
+module CPU24(input Clock);
 
-//Telat e brendshem te CPU
-wire[3:0] opcode; //D_OUT_1
-//CU_OUT_X
+//TELAT E BRENDSHEM TE CPU, SHIH CPU.PDF
+wire [3:0] opcode; //D_OUT_1
+//CU_OUT_x
 wire RegDst, Branch, MemRead, MemWrite, RegWrite, MemToReg, ALUSrc;
-wire[1:0] ALUOp;
+wire [1:0] ALUOp;
 
-//inicializimi i DataPath
+//inicializimi i Datapath    
 DataPath DP
 (
 Clock,
-RegDst, Branch, 
-MemRead, MemWrite, 
-RegWrite, MemToReg, 
-ALUSrc, ALUOp, opcode
+RegDst, Branch, MemRead, MemWrite, RegWrite, MemToReg, ALUSrc,
+ALUOp,
+opcode
 );
 
 //Inicializimi i COntrol Unit
-CU ControlUnit(
-opcode,
-RegDst,
-Branch,
-MemRead,
+CU ControlUnit(opcode,
+RegDst,  
+Branch, 
+MemRead, 
 MemToReg,
 ALUOp,
-MemWrite,
+MemWrite, 
 ALUSrc,
 RegWrite
 );
+
 endmodule
