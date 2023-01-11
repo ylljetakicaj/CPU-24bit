@@ -20,30 +20,34 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ALU1b(
+module ALU1(
+
     input A,
     input B,
-    input BInvert,
     input CIN,
+    input BInvert,
     input Less,
-    input [2:0] Operation,
+    input [1:0] Op,
     output Result,
-    output COUT
+    output CarryOut
     );
     
-    wire JoB, mB, Dhe, Ose, Mbledhesi, XOR, sll_wire, slt_wire, mul_wire;
+   wire JoB, mB, dhe_teli, ose_teli, mb_teli, XOR_teli, sll_teli, slt_teli, mul_teli; 
+   
+   assign JoB = ~B;
+   
+
+   mux2ne1 muxB(B, JoB, BInvert, mB);
+ 
+   assign dhe_teli = A & mB;
+   assign ose_teli = A | mB;
+//   assign XOR_teli = A ^ mB;
+//   assign sll_teli = A;
+//   assign slt_teli = A < mB ? 1 : 0;
+   
+   mbledhesi m1(A, mB, CIN, mb_teli, CarryOut);
+   
+   mux4ne1 MUX(dhe_teli, ose_teli, mb_teli, Less, Op, Result);
     
-    assign JoB = ~B;
-    
-    mux2ne1 muxB(B, JoB , BInvert, mB);
-    
-    assign Dhe = A & mB;
-    assign Ose = A | mB;   
-    mbledhesi adder (A, mB, CIN, Mbledhesi, COUT); 
-    assign XOR = A^mB;
-    assign sll_wire=A; //me bo veq ket funksion
-    assign slt_wire= A<mB? 1:0;
-    assign mul_wire=A*mB;
-    mux8ne1( Dhe, Ose, Mbledhesi, XOR, sll_wire, slt_wire, mul_wire, Less, Operation, Result);
     
 endmodule
