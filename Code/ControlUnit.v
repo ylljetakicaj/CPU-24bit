@@ -75,7 +75,7 @@ end
     
 4'b0011: //PER SS
     begin
-    RegDst = x;
+    RegDst = 1'bX;
     AluSrc = 1;
     MemToReg = 0;
     RegWrite = 1'bX;
