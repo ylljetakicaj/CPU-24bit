@@ -38,7 +38,7 @@ integer i;
 initial 
 begin
 for(i=0;i<16;i=i+1)
-   Registers[i] <= 16'd0; 
+    Registers[i] <= 24'd0; 
 end
 
 //Shkruaj ne regjiter
