@@ -98,6 +98,6 @@ assign pc_next = (andMuxBranch  == 1'b1) ? beqAddress : pc4;
 //Teli D_OUT_1 qe i dergohet CU
 assign opcode = instruction[23:20];
 
-assign Dalja=ALU_Out;
+//assign Dalja=ALU_Out;
 
 endmodule
