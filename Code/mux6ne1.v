@@ -27,8 +27,6 @@ module mux8ne1(
     input Hyrja3,
     input Hyrja4,
     input Hyrja5,
-    input Hyrja6,
-    input Hyrja7,
     input [2:0] S,
     output Dalja
     );
@@ -40,9 +38,8 @@ module mux8ne1(
 //s 101 H4
 //s 100 H3
 //s 001 H5
-//s 111 H6
-//s 110 H7
 
-assign Dalja=S[2] ? (S[1]? (S[0] ? Hyrja4 : Hyrja7) : (S[0] ? Hyrja6 : Hyrja2)) : (S[1] ? (S[0] ? Hyrja3 : Hyrja1) : (S[0] ? Hyrja5 : Hyrja0));
+
+    assign Dalja=S[2] ? (S[1]? (S[0] ? Hyrja4 : Hyrja5) : (S[0] ? Hyrja2 : Hyrja2)) : (S[1] ? (S[0] ? Hyrja3 : Hyrja1) : (S[0] ? Hyrja2 : Hyrja0));
 
 endmodule
