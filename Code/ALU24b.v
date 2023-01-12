@@ -24,7 +24,7 @@ module ALU24b(
     input [23:0] A,
     input [23:0] B,
     input BNegate,
-    input [2:0] Op,
+    input [1:0] Op,
     output Zero,
     output [23:0] Result,
     output Overflow,
@@ -70,9 +70,8 @@ assign Zero = ~(Result[0] | Result[1] |
                 Result[14] | Result[15] |
                 Result[16] | Result[17] |
                 Result[18] | Result[19] |
-                Result[19] | Result[20] |
-                Result[21] | Result[22] |
-                Result[23]);
+		Result[20] | Result[21] |
+		Result[22] | Result[23] );
                     
     assign Overflow = COUT[22] ^ CarryOut;
     
