@@ -31,6 +31,8 @@ module ControlUnit(
     output reg AluSrc,
     output reg RegWrite
     );
+    
+    
     always @ (OPCODE)
 begin
 case(OPCODE)
@@ -46,7 +48,7 @@ case(OPCODE)
        AluOp[1] = 1;
        AluOp[0] = 0;
     end
- 
+ /*
  4'b0110:  //PER R-FORMAT MUL
     begin
     RegDst = 1'bX;
@@ -59,7 +61,7 @@ case(OPCODE)
     AluOp[1] = 1;
     AluOp[0] = 1;
 end
-
+*/
 4'b0010: //PER LS
     begin
     RegDst = 0;
