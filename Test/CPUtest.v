@@ -26,7 +26,6 @@ reg Clock;
 reg [23:0] i;
 
 integer
-initial
 begin
 for(i=0; i < 30; i=i+1) //30x nderro nga Clock 0-1, 30 tehe pozitive
 begin
