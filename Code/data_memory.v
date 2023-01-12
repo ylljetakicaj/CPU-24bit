@@ -10,7 +10,7 @@ output wire[23:0] ReadData
 reg[7:0] dataMem[127:0];
 
 initial
-$readmemh("dataMemory.mem", dataMem);
+$readmemb("dataMemory.mem", dataMem);
 
 always@(posedge Clock)
 begin
