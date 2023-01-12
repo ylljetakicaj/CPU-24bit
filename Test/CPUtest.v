@@ -23,6 +23,7 @@
 module CPUtest();
 
 reg Clock;
+reg [23:0] i;
 
 integer i;
 initial
