@@ -30,7 +30,7 @@ output reg [3:0] ALUCtrl
 always @(ALUOp)
 begin
 case(ALUOp) // Pyet per vleren e ALUOp, 00-lw,sw; 01-beq,bne, 10-R-format, 11 - I-format
-    2'b00: ALUCtrl = 4'b0100; //LW+SW (mbledhje)
+    2'b00: ALUCtrl = 4'b0100; //LS+SS (mbledhje)
     2'b01: ALUCtrl = 4'b1100; //BEQ+BNE (zbritje)
     2'b10: //R-Format
         case(Funct)
@@ -40,13 +40,13 @@ case(ALUOp) // Pyet per vleren e ALUOp, 00-lw,sw; 01-beq,bne, 10-R-format, 11 - 
             4'b0011: ALUCtrl = 4'b1010; //SUB
             4'b0100: ALUCtrl = 4'b0011;  //SLT
             4'b0110: ALUCtrl = 4'b0101;  //XOR
-            4'b0111: ALUCtrl = 4'b0110;  //SLL
+           // 4'b0111: ALUCtrl = 4'b0110;  //SLL
         endcase
-
+/*
     2'b11: //I-format
         case(opcode)
             4'b0110: ALUCtrl = 4'b0100; // per MUL
-        endcase
+        endcase */
 endcase
 end
 
