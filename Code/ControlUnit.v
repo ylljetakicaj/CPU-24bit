@@ -112,18 +112,7 @@ end
     AluOp[0] = 0;
     end 
   
-4'b0110:  //PER XOR
-    begin
-    RegDst = 1;
-    AluSrc = 0;
-    MemToReg = 0;
-    RegWrite = 1;
-    MemRead = 0;
-    MemWrite = 0;
-    Branch = 0;
-    AluOp[1] = 1;
-    AluOp[0] = 0;
-end
+
 endcase
 
 endmodule
