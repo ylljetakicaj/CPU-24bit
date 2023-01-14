@@ -53,10 +53,10 @@ end
 //T2 - PC rritet per 3 (ne sistemet 24 biteshe) per te gjitha instruksionet pervec BEQ
 assign pc4 = pc_initial + 3;
 
-// //T14 - pergatitja e adreses per kercim ne BEQ (164 bit si MSB, 12 bit nga pjesa imediate, 1 bit shtyrje majtas (x2)
-// wire[23:0] shifter2beq1;
-// assign shifter2beq1 = {{11{instruction[11]}}, instruction[11:0], 1'b0};
-// assign shifter2beq = shifter2beq1 + shifter2beq1;
+//T14 - pergatitja e adreses per kercim ne BEQ (164 bit si MSB, 12 bit nga pjesa imediate, 1 bit shtyrje majtas (x2)
+wire[23:0] shifter2beq1;
+assign shifter2beq1 = {{11{instruction[11]}}, instruction[11:0], 1'b0};
+assign shifter2beq = shifter2beq1 + shifter2beq1;
 
 // Instr mem // inicializimi i IM (PC adresa hyrje, teli instruction dalje)
 InstructionMemory IM(pc_initial, instruction);
