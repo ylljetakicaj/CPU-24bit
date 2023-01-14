@@ -46,7 +46,7 @@ module ALU1(
    
    mbledhesi m1(A, mB, CIN, mb_teli, CarryOut);
    
-    mux6ne1 MUX(dhe_teli, ose_teli, mb_teli, slt_teli, XOR_teli, Less, Op, Result);
+   mux4ne1 MUX(dhe_teli, ose_teli, mb_teli, Less, Op, Result); 
     
     
 endmodule
