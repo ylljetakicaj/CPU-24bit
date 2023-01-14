@@ -45,8 +45,8 @@ case(OPCODE)
        MemRead = 0;
        MemWrite = 0;
        Branch = 0;
-       AluOp[1] = 1;
-       AluOp[0] = 0;
+       AluOp[1] = 0;
+       AluOp[0] = 1;
     end
  /*
  4'b0110:  //PER R-FORMAT MUL
@@ -97,8 +97,8 @@ end
     MemRead = 0;
     MemWrite = 0;
     Branch = 1;
-    AluOp[1] = 0;
-    AluOp[0] = 1;
+    AluOp[1] = 1;
+    AluOp[0] = 0;
     end 
     
 4'b0001: //PER ADDI
